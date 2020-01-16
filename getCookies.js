@@ -1,5 +1,13 @@
-var CookieName = "腾讯视频";
-var CookieKey = "chavy_cookie_videoqq";
+var url = $request.url;
+if(url.indexOf('video.qq') != -1)
+{
+  var CookieName = "腾讯视频";
+  var CookieKey = "chavy_cookie_videoqq";
+} else if (url.indexOf('acfun') != -1)
+{
+  var CookieName = "AcFun";
+  var CookieKey = "chavy_cookie_acfun";
+}
 var CookieValue = $request.headers['Cookie'];
 if ($persistentStore.read(CookieKey) != (undefined || null)) {
   if ($persistentStore.read(CookieKey) != CookieValue) {
