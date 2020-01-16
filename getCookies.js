@@ -7,6 +7,10 @@ if(url.indexOf('video.qq') != -1)
 {
   var CookieName = "AcFun";
   var CookieKey = "chavy_cookie_acfun";
+} else if (url.indexOf('music.163') != -1)
+{
+  var CookieName = "网易云音乐";
+  var CookieKey = "chavy_cookie_neteasemusic";
 }
 var CookieValue = $request.headers['Cookie'];
 if ($persistentStore.read(CookieKey) != (undefined || null)) {
