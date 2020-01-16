@@ -1,14 +1,22 @@
-var hasCookie = $persistentStore.read('chavy_cookie_acfun');	
-var hasToken = $persistentStore.read('chavy_token_acfun');	
-var cookieVal = $request.headers['Cookie'];	
-var tokenVal = $request.headers['access_token'];	
-if(cookieVal&&tokenVal) {	
-   if(!hasCookie||!hasToken||(hasCookie!==cookieVal||hasToken!==tokenVal)) {	
-      var setCookie = $persistentStore.write('chavy_cookie_acfun', cookieVal);	
-      var setToken = $persistentStore.write('chavy_token_acfun', tokenVal);	
-         if(setCookie&&setToken) {	
-           $notification.post('Result:', 'AcFun', 'Success')	
-         }	
-    }	
-}	
+    var CookieName = "AcFun";
+    var CookieKey = "chavy_cookie_acfun";
+    var CookieValue = $request.headers['Cookie'];
+    if ($persistentStore.read(CookieKey) != (undefined || null)) {
+      if ($persistentStore.read(CookieKey) != CookieValue) {
+        var cookie = $persistentStore.write(CookieValue, CookieKey);
+        if (!cookie) {
+          $notification.post("更新" + CookieName + "Cookie失败‼️", "", "");
+        } else {
+          $notification.post("更新" + CookieName + "Cookie成功 🎉", "", "");
+        }
+      }
+    } else {
+      var cookie = $persistentStore.write(CookieValue, CookieKey);
+      if (!cookie) {
+        $notification.post("首次写入" + CookieName + "Cookie失败‼️", "", "");
+      } else {
+        $notification.post("首次写入" + CookieName + "Cookie成功 🎉", "", "");
+      }
+    }
+
 $done();
